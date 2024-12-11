@@ -11,20 +11,21 @@
     <div class="container location-container">
         <div class="row search-weather">
             <div class="col-6">
-                <form class="input-bg">
+                <div class="input-bg">
                     <div> Search </div>
-                    <input type="text" placeholder="Location">
-                </form>
+                    <input id="searchLocation" type="text" placeholder="Location">
+                </div>
             </div>
             <div class="col-6 location">
-                <h1> Location </h1>
+                <h1 id="weatherLocation"> Location </h1>
                 <br>
-                <h3> Date </h3>
+                <h3 id="weatherDate"> Date </h3>
             </div>
         </div>
         <div class="row favorites">
             <div class="col fav-button">
                 <button> Add/Remove <br> from favorites </button>
+                <button id="testApi"> Test API </button>
             </div>
         </div>
     </div>

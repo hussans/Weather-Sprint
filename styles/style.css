@@ -66,14 +66,11 @@ body {
     width: 200px;
 }
 
-.location-container form div {
+.location-container div div {
     font-family: 'Inter', Arial, Helvetica, sans-serif;
     font-size: 2rem;
     color: black;
-
-
-    display: flex;
-    justify-content: center;
+    text-align: center;
 }
 
 .location h1 {
