@@ -8,7 +8,42 @@
 </head>
 <body>
 
-    
+    <div class="container location-container">
+        <div class="row search-weather">
+            <div class="col-6">
+                <form class="input-bg">
+                    <div> Search </div>
+                    <input type="text" placeholder="Location">
+                </form>
+            </div>
+            <div class="col-6 location">
+                <h1> San Fransisco, CA </h1>
+                <br>
+                <h3> 12/12/2024 </h3>
+            </div>
+        </div>
+        <div class="row favorites">
+            <div class="col fav-button">
+                <button> Add/Remove <br> from favorites </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container temp-container">
+        <div class="col-10 temp-main">
+            <h2> Current Weather </h2>
+            <img src="./assets/images/weathericon.png" alt="weather sun/cloud icon">
+            <h3> Temperature </h3>
+            <p> Min </p>
+            <p> </p>
+            <p> Max </p>
+            <p> </p>
+        </div>
+        <div class="col-2 fav-container">
+            <h2> Favorites </h2>
+            <hr>
+        </div>
+    </div>
 
     <script type="module" src="./scripts/app.js"></script>
 </body>

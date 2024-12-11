@@ -1,0 +1,125 @@
+/* Fonts --- */
+
+@font-face {
+    font-family: 'Inter';
+    src: url(../assets/fonts/Inter_18pt-Regular.ttf);
+}
+
+/* Fonts --- */
+
+/* Body --- */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url(../assets/images/weatherbg.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+/* Body --- */
+
+/* Top Portion --- Location, Date, Search function, & Favorites button */
+
+.location-container {
+    margin: 50px;
+}
+
+
+.search-weather {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.favorites {
+    display: flex;
+    justify-content: end;
+}
+
+.fav-button button {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    background-color: rgb(255,234,44);
+    border: 1px solid black;
+    padding: 10px 25px;
+}
+
+.fav-button button:hover {
+    cursor: pointer;
+    background-color: rgb(252,241,96);
+}
+
+.fav-button button:active {
+    background-color: rgb(254,207,2);
+}
+
+.input-bg {
+    background-color: rgba(168, 168, 168, 0.750);
+    padding: 20px 20px 25px 20px;
+}
+
+.input-bg input[type=text] {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    border: none;
+    padding: 5px 15px ;
+    width: 200px;
+}
+
+.location-container form div {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    color: white;
+
+
+    display: flex;
+    justify-content: center;
+}
+
+.location h1 {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-size: 3rem;
+    color: white;
+    margin-top: 0;
+    margin-bottom: 0;
+
+}
+
+.location h3 {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    color: white;
+    display: flex;
+    justify-content: end;
+    margin: 0;
+}
+
+/* Center Portion --- Temperature, Weather Icon, Min & Max Temp */
+
+.temp-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+}
+
+.temp-container .col-10 img {
+    width: 180px;
+    height: 160px;
+}
+
+.temp-main {
+    background-color: rgba(168, 168, 168, 0.750);
+    grid-column: 2 / 3;
+}
+
+.fav-container {
+    background-color: rgba(168, 168, 168, 0.750);
+    margin: 0px 50px 0px 200px;
+    grid-column: 3 / 4;
+}

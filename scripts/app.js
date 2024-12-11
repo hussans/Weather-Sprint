@@ -12,9 +12,6 @@ async function getWeather() {
 
         console.log(data);
 
-        const lat = 40.71;
-        const lon = 74.00;
-
         const temperature = data.current.temp;
         const tempCels = Math.floor(temperature - 273.15);
 
@@ -44,7 +41,7 @@ getWeather();
 
 async function getWeeklyForecast(){
     try {
-        const response = await fetch(`api.openweathermap.org/data/2.5/forecast?lat=33.44&lon=-94.04&appid=${APIKEY}`)
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=33.44&lon=-94.04&appid=${APIKEY}`)
         if(!response.ok){
             throw new Error("Forecast Error");
         }
@@ -52,7 +49,9 @@ async function getWeeklyForecast(){
         console.log(data);
     
         const city = data.city.name;
-        console.log(`City: ${city}`);
+        const country = data.city.country;
+
+        console.log(`Location: ${city}, ${country} `);
 
     } catch(error){
         console.error(error.message);
