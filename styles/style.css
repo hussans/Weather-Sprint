@@ -12,7 +12,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url(../assets/images/weatherbg.jpg);
+    background-image: url(../assets/images/backgroundimg.jpeg);
     background-size: 100%;
     background-repeat: no-repeat;
 }
@@ -24,7 +24,6 @@ body {
 .location-container {
     margin: 50px;
 }
-
 
 .search-weather {
     display: flex;
@@ -56,7 +55,7 @@ body {
 }
 
 .input-bg {
-    background-color: rgba(168, 168, 168, 0.750);
+    background-color: rgba(217, 217, 217, 0.650);
     padding: 20px 20px 25px 20px;
 }
 
@@ -70,7 +69,7 @@ body {
 .location-container form div {
     font-family: 'Inter', Arial, Helvetica, sans-serif;
     font-size: 2rem;
-    color: white;
+    color: black;
 
 
     display: flex;
@@ -109,17 +108,143 @@ body {
 }
 
 .temp-container .col-10 img {
-    width: 180px;
-    height: 160px;
+    width: 200px;
+    height: 200px;
 }
 
 .temp-main {
-    background-color: rgba(168, 168, 168, 0.750);
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 4;
+
+    background-color: rgba(217, 217, 217, 0.650);
     grid-column: 2 / 3;
+
+    padding: 15px;
+}
+
+.temp-main h2 {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 2.5rem;
+    color: white;
+    grid-column: 1 / 7;
+    text-align: center;
+    margin: 1px;
+}
+
+.temp-main img {
+    grid-column: 1 / 2;
+    grid-row: 2 / 4;
+}
+
+.temp-container h3 {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 3rem;
+    color: white;
+    grid-column: 2 / 7;
+    grid-row: 2;
+
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 0;
+}
+
+.temp-min {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    color: black;
+    grid-column: 3 / 4;
+    grid-row: 3;
+    text-align: center;
+    align-self: flex-end;
+    margin-top: 0;
+}
+
+.min {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    color: white;
+    grid-column: 3 / 4;
+    grid-row: 4;
+
+    text-align: center;
+    margin: 0;
+}
+
+.temp-max {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    color: black;
+    grid-column: 5 / 6;
+    grid-row: 3;
+    text-align: center;
+    align-self: flex-end;
+    margin-top: 0;
+}
+
+.max {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    color: white;
+    grid-column: 5 / 6;
+    grid-row: 4;
+
+    text-align: center;
+    margin: 0;
 }
 
 .fav-container {
-    background-color: rgba(168, 168, 168, 0.750);
+    background-color: rgba(217, 217, 217, 0.650);
     margin: 0px 50px 0px 200px;
     grid-column: 3 / 4;
+}
+
+.fav-container h2 {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+    color: white;
+
+    text-align: center;
+    margin: 10px;
+}
+
+hr {
+    margin-left: 25px;
+    margin-right: 25px;
+    border: .5px solid black;
+}
+
+.week-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 3;
+
+    background-color: rgba(217, 217, 217, 0.650);
+    padding: 15px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.week-container div {
+    display: block;
+    justify-content: center;
+    text-align: center;
+}
+
+.week-container img {
+    width: 100px;
+    height: 100px;
+}
+
+.week-container p {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-size: 1.1rem;
+
+    margin: 5px;
+}
+
+.week-temp {
+    color: white;
+    font-size: 1rem;
 }
