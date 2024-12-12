@@ -6,9 +6,16 @@ let searchLocation = document.getElementById('searchLocation');
 /* HTML to Change Variables */
 let weatherLocation = document.getElementById('weatherLocation');
 let weatherDate = document.getElementById('weatherDate');
+let currentTemp = document.getElementById('currentTemp');
+let currentTempMin = document.getElementById('currentTempMin');
+let currentTempMax = document.getElementById('currentTempMax');
+let favBtn = document.getElementById('favBtn');
+let favoritesContainer = document.querySelector('.favorites');
+
+let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
 /* Test Variable */
-let testApi = document.getElementById('testApi');
+// let testApi = document.getElementById('testApi');
 
 
 async function getWeather(lat, lon) {
@@ -21,7 +28,7 @@ async function getWeather(lat, lon) {
         return data;
 
     } catch(error) {
-        console.error("Error in getWeather:", error.message);
+        console.error("Error in getWeather: ", error.message);
     }
 }
 
@@ -37,7 +44,7 @@ async function getWeeklyForecast(lat, lon) {
         return data;
 
     } catch(error) {
-        console.error("Error in getWeeklyForecast:", error.message);
+        console.error("Error in getWeeklyForecast: ", error.message);
     }
 }
 
@@ -56,16 +63,36 @@ async function getWeatherLocation(city) {
         return data[0];
 
     } catch(error) {
-        console.error("Error in getWeatherLocation:", error.message);
+        console.error("Error in getWeatherLocation: ", error.message);
     }
 }
 
 
+function updateCurrentWeather(weatherData, city, country) {
+    const date = new Date(weatherData.current.dt * 1000).toLocaleDateString();
+    weatherLocation.textContent = `${city}, ${country}`;
+    weatherDate.textContent = date;
+    currentTemp.textContent = `${Math.round(weatherData.current.temp - 273.15)}°C`;
+    currentTempMin.textContent = `${Math.round(weatherData.daily[0].temp.min - 273.15)}°C`;
+    currentTempMax.textContent = `${Math.round(weatherData.daily[0].temp.max - 273.15)}°C`;
+}
+
+
+function updateForecast(daily) {
+    daily.slice(1, 6).forEach((data, index) => {
+        const date = new Date(data.dt * 1000).toLocaleDateString('en-US', { weekday: 'long' });
+        const minMax = `${Math.round(data.temp.min - 273.15)}°C / ${Math.round(data.temp.max - 273.15)}°C`;
+        document.getElementById(`weekDay${index + 1}`).textContent = date;
+        document.getElementById(`weekDay${index + 1}MinMax`).textContent = minMax;
+    });
+}
+
+
 searchLocation.addEventListener('keypress', async (e) => {
-    if(e.key === 'Enter') {
+    if (e.key === 'Enter') {
         let userInput = searchLocation.value.trim();
 
-        if(!userInput) {
+        if (!userInput) {
             console.error("Please enter a valid city name.");
             return;
         }
@@ -73,7 +100,7 @@ searchLocation.addEventListener('keypress', async (e) => {
         console.log("User Input:", userInput);
 
         const locationData = await getWeatherLocation(userInput);
-        if(!locationData) {
+        if (!locationData) {
             console.error("Invalid city name.");
             return;
         }
@@ -83,14 +110,9 @@ searchLocation.addEventListener('keypress', async (e) => {
         const weatherData = await getWeather(lat, lon);
         const weeklyData = await getWeeklyForecast(lat, lon);
 
-        if(weatherData && weeklyData) {
-            weatherLocation.textContent = `${city}, ${country}`;
-
-            const date = weatherData.current.dt;
-            const currentDate = new Date(date * 1000);
-            const currentDateFormat = currentDate.toLocaleDateString();
-
-            weatherDate.textContent = currentDateFormat;
+        if (weatherData && weeklyData) {
+            updateCurrentWeather(weatherData, city, country);
+            updateForecast(weatherData.daily);
 
             console.log("Weather Data:", weatherData);
             console.log("Weekly Forecast:", weeklyData);
@@ -99,6 +121,7 @@ searchLocation.addEventListener('keypress', async (e) => {
         }
     }
 });
+
 
 
 /* Testing API Below */
