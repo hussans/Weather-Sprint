@@ -10,13 +10,12 @@ let currentTemp = document.getElementById('currentTemp');
 let currentTempMin = document.getElementById('currentTempMin');
 let currentTempMax = document.getElementById('currentTempMax');
 let favBtn = document.getElementById('favBtn');
-let favoritesContainer = document.querySelector('.favorites');
+let favoritesContainer = document.querySelector('.fav-container');
 
 let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
 /* Test Variable */
 // let testApi = document.getElementById('testApi');
-
 
 async function getWeather(lat, lon) {
     try {
@@ -31,8 +30,6 @@ async function getWeather(lat, lon) {
         console.error("Error in getWeather: ", error.message);
     }
 }
-
-
 
 async function getWeeklyForecast(lat, lon) {
     try {
@@ -75,17 +72,136 @@ function updateCurrentWeather(weatherData, city, country) {
     currentTemp.textContent = `${Math.round(weatherData.current.temp - 273.15)}°C`;
     currentTempMin.textContent = `${Math.round(weatherData.daily[0].temp.min - 273.15)}°C`;
     currentTempMax.textContent = `${Math.round(weatherData.daily[0].temp.max - 273.15)}°C`;
+
+    document.getElementById("currentWeatherIcon").classList.remove("hidden");
 }
 
 
 function updateForecast(daily) {
-    daily.slice(1, 6).forEach((data, index) => {
-        const date = new Date(data.dt * 1000).toLocaleDateString('en-US', { weekday: 'long' });
-        const minMax = `${Math.round(data.temp.min - 273.15)}°C / ${Math.round(data.temp.max - 273.15)}°C`;
-        document.getElementById(`weekDay${index + 1}`).textContent = date;
-        document.getElementById(`weekDay${index + 1}MinMax`).textContent = minMax;
+
+    const data1 = daily[1];
+    const date1 = new Date(data1.dt * 1000).toLocaleDateString('en-US', { weekday: 'long' });
+    const minTemp1 = Math.round(data1.temp.min - 273.15);
+    const maxTemp1 = Math.round(data1.temp.max - 273.15);
+    const minMax1 = minTemp1 + "°C / " + maxTemp1 + "°C";
+    document.getElementById("weekDay1").textContent = date1;
+    document.getElementById("weekDay1MinMax").textContent = minMax1;
+    document.getElementById("weekDay1Icon").classList.remove("hidden");
+
+
+    const data2 = daily[2];
+    const date2 = new Date(data2.dt * 1000).toLocaleDateString('en-US', { weekday: 'long' });
+    const minTemp2 = Math.round(data2.temp.min - 273.15);
+    const maxTemp2 = Math.round(data2.temp.max - 273.15);
+    const minMax2 = minTemp2 + "°C / " + maxTemp2 + "°C";
+    document.getElementById("weekDay2").textContent = date2;
+    document.getElementById("weekDay2MinMax").textContent = minMax2;
+    document.getElementById("weekDay2Icon").classList.remove("hidden");
+
+    const data3 = daily[3];
+    const date3 = new Date(data3.dt * 1000).toLocaleDateString('en-US', { weekday: 'long' });
+    const minTemp3 = Math.round(data3.temp.min - 273.15);
+    const maxTemp3 = Math.round(data3.temp.max - 273.15);
+    const minMax3 = minTemp3 + "°C / " + maxTemp3 + "°C";
+    document.getElementById("weekDay3").textContent = date3;
+    document.getElementById("weekDay3MinMax").textContent = minMax3;
+    document.getElementById("weekDay3Icon").classList.remove("hidden");
+
+
+    const data4 = daily[4];
+    const date4 = new Date(data4.dt * 1000).toLocaleDateString('en-US', { weekday: 'long' });
+    const minTemp4 = Math.round(data4.temp.min - 273.15);
+    const maxTemp4 = Math.round(data4.temp.max - 273.15);
+    const minMax4 = minTemp4 + "°C / " + maxTemp4 + "°C";
+    document.getElementById("weekDay4").textContent = date4;
+    document.getElementById("weekDay4MinMax").textContent = minMax4;
+    document.getElementById("weekDay4Icon").classList.remove("hidden");
+
+    const data5 = daily[5];
+    const date5 = new Date(data5.dt * 1000).toLocaleDateString('en-US', { weekday: 'long' });
+    const minTemp5 = Math.round(data5.temp.min - 273.15);
+    const maxTemp5 = Math.round(data5.temp.max - 273.15);
+    const minMax5 = minTemp5 + "°C / " + maxTemp5 + "°C";
+    document.getElementById("weekDay5").textContent = date5;
+    document.getElementById("weekDay5MinMax").textContent = minMax5;
+    document.getElementById("weekDay5Icon").classList.remove("hidden");
+}
+
+
+function updateFavoritesUI() {
+
+    const buttons = favoritesContainer.querySelectorAll('.fav-city-btn');
+    buttons.forEach(function(button) {
+        button.remove();
+    });
+
+    let city1 = favorites[0];
+    if (city1 && typeof city1 === 'string' && city1.trim()) {
+        const cityBtn1 = document.createElement('button');
+        cityBtn1.textContent = city1;
+        cityBtn1.classList.add('fav-city-btn');
+        cityBtn1.onclick = function() { handleCityClick(city1); };
+        favoritesContainer.appendChild(cityBtn1);
+    }
+
+    let city2 = favorites[1];
+    if (city2 && typeof city2 === 'string' && city2.trim()) {
+        const cityBtn2 = document.createElement('button');
+        cityBtn2.textContent = city2;
+        cityBtn2.classList.add('fav-city-btn');
+        cityBtn2.onclick = function() { handleCityClick(city2); };
+        favoritesContainer.appendChild(cityBtn2);
+    }
+
+    let city3 = favorites[2];
+    if (city3 && typeof city3 === 'string' && city3.trim()) {
+        const cityBtn3 = document.createElement('button');
+        cityBtn3.textContent = city3;
+        cityBtn3.classList.add('fav-city-btn');
+        cityBtn3.onclick = function() { handleCityClick(city3); };
+        favoritesContainer.appendChild(cityBtn3);
+    }
+
+    let city4 = favorites[3];
+    if (city4 && typeof city4 === 'string' && city4.trim()) {
+        const cityBtn4 = document.createElement('button');
+        cityBtn4.textContent = city4;
+        cityBtn4.classList.add('fav-city-btn');
+        cityBtn4.onclick = function() { handleCityClick(city4); };
+        favoritesContainer.appendChild(cityBtn4);
+    }
+
+    let city5 = favorites[4];
+    if (city5 && typeof city5 === 'string' && city5.trim()) {
+        const cityBtn5 = document.createElement('button');
+        cityBtn5.textContent = city5;
+        cityBtn5.classList.add('fav-city-btn');
+        cityBtn5.onclick = function() { handleCityClick(city5); };
+        favoritesContainer.appendChild(cityBtn5);
+    }
+}
+
+function handleCityClick(city) {
+    getWeatherLocation(city).then(function(locationData) {
+        if (!locationData) {
+            console.error("Invalid city name.");
+            return;
+        }
+
+        const { lat, lon, name, country } = locationData;
+        getWeather(lat, lon).then(function(weatherData) {
+            getWeeklyForecast(lat, lon).then(function(weeklyData) {
+                if (weatherData && weeklyData) {
+                    updateCurrentWeather(weatherData, name, country);
+                    updateForecast(weatherData.daily);
+                } else {
+                    console.error("Weather data not available.");
+                }
+            });
+        });
     });
 }
+
 
 
 searchLocation.addEventListener('keypress', async (e) => {
