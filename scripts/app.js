@@ -11,86 +11,94 @@ let weatherDate = document.getElementById('weatherDate');
 let testApi = document.getElementById('testApi');
 
 
-async function getWeather() {
+async function getWeather(lat, lon) {
     try {
-        const response = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=37.95&lon=-121.29&appid=${APIKEY}`);
-        if(!response.ok){
+        const response = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${APIKEY}`);
+        if(!response.ok) {
             throw new Error("Weather Location Error");
         }
         const data = await response.json();
         return data;
 
-    } catch(error){
-        console.error(error.message);
+    } catch(error) {
+        console.error("Error in getWeather:", error.message);
     }
 }
 
 
-async function getWeeklyForecast(){
+
+async function getWeeklyForecast(lat, lon) {
     try {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=37.95&lon=-121.29&appid=${APIKEY}`)
-        if(!response.ok){
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKEY}`);
+        if(!response.ok) {
             throw new Error("Forecast Error");
         }
         const data = await response.json();
         return data;
 
-    } catch(error){
-        console.error(error.message);
+    } catch(error) {
+        console.error("Error in getWeeklyForecast:", error.message);
     }
-    
 }
 
-async function getWeatherLocation(){
-    try{
-        const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=Stockton,CA,USA&appid=${APIKEY}`);
-        if(!response.ok){
-            throw new Error("Location Error")
+async function getWeatherLocation(city) {
+    try {
+        const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${APIKEY}`);
+        if (!response.ok) {
+            throw new Error("Location Error");
         }
-        const data = await reponse.json();
-        return data;
+        const data = await response.json();
+        
+        if (data.length === 0) {
+            throw new Error("No location data found");
+        }
+        console.log("Location Data:", data);
+        return data[0];
 
-        console.log(data);
-
-    } catch(error){
-        console.error(error.message);
+    } catch(error) {
+        console.error("Error in getWeatherLocation:", error.message);
     }
 }
 
 
 searchLocation.addEventListener('keypress', async (e) => {
-
-    let data = await getWeather();
-    let dataWeekly = await getWeeklyForecast();
-
-    
     if(e.key === 'Enter') {
-        let userInput = searchLocation.value;
-        userInput = userInput.trim().toLowerCase();
-        
-        console.log(data);
-        console.log(dataWeekly);
+        let userInput = searchLocation.value.trim();
 
-        /* Location (City, Country) */
-        const city = dataWeekly.city.name;
-        const country = dataWeekly.city.country;
+        if(!userInput) {
+            console.error("Please enter a valid city name.");
+            return;
+        }
 
-        /* Current Date */
-        const date = data.current.dt;
-        const currentDate = new Date(date * 1000);
-        const currentDateFormat = currentDate.toLocaleDateString();
+        console.log("User Input:", userInput);
 
-        weatherLocation.textContent = `${city}, ${country}`;
-        weatherDate.textContent =  `${currentDateFormat}`;
+        const locationData = await getWeatherLocation(userInput);
+        if(!locationData) {
+            console.error("Invalid city name.");
+            return;
+        }
+
+        const { lat, lon, name: city, country } = locationData;
+
+        const weatherData = await getWeather(lat, lon);
+        const weeklyData = await getWeeklyForecast(lat, lon);
+
+        if(weatherData && weeklyData) {
+            weatherLocation.textContent = `${city}, ${country}`;
+
+            const date = weatherData.current.dt;
+            const currentDate = new Date(date * 1000);
+            const currentDateFormat = currentDate.toLocaleDateString();
+
+            weatherDate.textContent = currentDateFormat;
+
+            console.log("Weather Data:", weatherData);
+            console.log("Weekly Forecast:", weeklyData);
+        } else {
+            console.error("Weather data not available.");
+        }
     }
 });
-
-
-function addingTwoNumbers(num1, num2) {
-    console.log(num1 + num2);
-}
-
-addingTwoNumbers(34, 21);
 
 
 /* Testing API Below */
