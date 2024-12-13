@@ -11,6 +11,6 @@
 **Review**:
 <br/>
 <br/>
-**GitHub**:
+**GitHub**: https://github.com/hussans/Weather-Sprint
 <br/>
 **Figma**: https://www.figma.com/design/iZLj5rMh4J6QhNpA7YkChE/Untitled?node-id=32-347&node-type=frame&t=ZsbIfiXP8OBKM6lB-0
