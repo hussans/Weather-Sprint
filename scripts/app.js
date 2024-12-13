@@ -202,7 +202,28 @@ function handleCityClick(city) {
     });
 }
 
+favBtn.addEventListener('click', () => {
 
+    let userInput = searchLocation.value.trim();
+
+    if (userInput === "") {
+        console.log("Please enter a city name.");
+        return;
+    }
+
+    let cityIndex = favorites.indexOf(userInput);
+
+    if (cityIndex === -1) {
+        favorites.push(userInput);
+        console.log(userInput + " added to favorites.");
+    } else {
+        favorites.splice(cityIndex, 1);
+        console.log(userInput + " removed from favorites.");
+    }
+
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    updateFavoritesUI();
+});
 
 searchLocation.addEventListener('keypress', async (e) => {
     if (e.key === 'Enter') {
