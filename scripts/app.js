@@ -1,5 +1,7 @@
 import { APIKEY } from './environment.js';
 
+
+
 /* Search Variable */
 let searchLocation = document.getElementById('searchLocation');
 
