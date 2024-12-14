@@ -10,6 +10,8 @@
 <br/>
 **Review**: For some reason the getWeather() function doesnt work, the getWeatherLocation() one is fine but I cant really check for anything else, but besides that the design looks really good compared to the figma. Not really anything else I can say without the api working tho
 <br/>
+From Hassan - He forgot to put in his API Key ^ 
+<br/>
 <br/>
 **GitHub**: https://github.com/hussans/Weather-Sprint
 <br/>
